@@ -1,4 +1,8 @@
 package org.example.springtestci.domain;
 
-public record Flower() {
+public record Flower(
+        String name,
+        String color,
+        int price
+) {
 }

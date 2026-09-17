@@ -1,4 +1,6 @@
 package org.example.springtestci.infra;
 
-public interface FlowerJpaRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface FlowerJpaRepository extends JpaRepository<FlowerJpaEntity, Long> {
 }

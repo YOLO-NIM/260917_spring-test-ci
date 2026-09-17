@@ -1,4 +1,4 @@
 package org.example.springtestci.ui;
 
-public class FlowerDto {
+public record FlowerDto(String name, String color, int price) {
 }
