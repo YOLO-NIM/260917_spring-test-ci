@@ -1,4 +1,4 @@
-# main 브랜치 푸시 시 동작하는 CI 워크플로우
+# master 브랜치 푸시 시 동작하는 CI 워크플로우
 # Continuous Integration : 지속적 통합
 name: CI
 
@@ -6,7 +6,7 @@ name: CI
 on:
   # 푸시 되면
   push:
-    # main 브랜치에서
+    # master 브랜치에서
     branches:
       - master # master 브랜치 푸시만 감지
 
