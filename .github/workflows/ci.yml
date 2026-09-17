@@ -1,4 +1,4 @@
-# master 브랜치 푸시 시 동작하는 CI 워크플로우
+# master 브랜치 푸시 및 대상 PR 시 동작하는 CI 워크플로우
 # Continuous Integration : 지속적 통합
 name: CI
 
@@ -9,6 +9,18 @@ on:
     # master 브랜치에서
     branches:
       - master # master 브랜치 푸시만 감지
+    # 문서만 변경되면 빌드 불필요
+    paths-ignore:
+      - '**.md' # 마크다운 문서 변경은 제외
+      - '.github/workflows/**' # 워크플로우 자체 수정도 제외
+  # PR 생성/업데이트 되면
+  pull_request:
+    # master 브랜치를 대상으로 하는 PR에서
+    branches:
+      - master # master 대상 PR만 감지
+    # 문서만 변경되면 빌드 불필요
+    paths-ignore:
+      - '**.md' # 마크다운 문서 변경은 제외
 
 # GHCR 푸시를 위한 최소 권한 부여
 permissions:
@@ -69,6 +81,8 @@ jobs:
   build-and-push:
     # test 작업 성공해야만 실행됨
     needs: test
+    # PR에서는 이미지 푸시 없이 테스트만 검증
+    if: github.event_name == 'push' # master 푸시일 때만 실행
     runs-on: ubuntu-latest # 우분투 환경에서 실행
     steps:
       # 러너는 매번 새로 생성되어 코드가 없음
